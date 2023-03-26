@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
+    <title>Mapping-Home</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link th:href="@{bootstrap-5.0.2-dist/css/bootstrap.css}" rel="stylesheet"/>
+    <link th:href="@{bootstrap-5.0.2-dist/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{bootstrap-5.0.2-dist/css/bootstrap.css.map}" rel="stylesheet"/>
+    <link th:href="@{bootstrap-5.0.2-dist/css/bootstrap.min.css.map}" rel="stylesheet"/>
+    <link th:href="@{bootstrap-5.0.2-dist/css/bootstrap.rtl.css}" rel="stylesheet"/>
+    <link th:href="@{bootstrap-5.0.2-dist/css/bootstrap.rtl.css.map}" rel="stylesheet"/>
+    <link th:href="@{bootstrap-5.0.2-dist/css/bootstrap.rtl.min.css}" rel="stylesheet"/>
+    <link th:href="@{bootstrap-5.0.2-dist/css/bootstrap.rtl.min.css.map}" rel="stylesheet"/>
+    <link th:href="@{bootstrap-5.0.2-dist/css/bootstrap-grid.css}" rel="stylesheet"/>
+    <link th:href="@{bootstrap-5.0.2-dist/css/bootstrap-grid.css.map}" rel="stylesheet"/>
+    <link th:href="@{bootstrap-5.0.2-dist/css/bootstrap-grid.min.css}" rel="stylesheet"/>
+    <link th:href="@{bootstrap-5.0.2-dist/css/bootstrap-grid.min.css.map}" rel="stylesheet"/>
+    <link th:href="@{bootstrap-5.0.2-dist/css/bootstrap-grid.rtl.min.css}" rel="stylesheet"/>
+    <link th:href="@{bootstrap-5.0.2-dist/css/bootstrap-grid.rtl.min.css.map}" rel="stylesheet"/>
+    <link th:href="@{bootstrap-5.0.2-dist/css/bootstrap-reboot.css}" rel="stylesheet"/>
+    <link th:href="@{bootstrap-5.0.2-dist/css/bootstrap-reboot.css.map}" rel="stylesheet"/>
+    <link th:href="@{bootstrap-5.0.2-dist/css/bootstrap-reboot.min.css.map}" rel="stylesheet"/>
+    <link th:href="@{bootstrap-5.0.2-dist/css/bootstrap-reboot.rtl.css}" rel="stylesheet"/>
+    <link th:href="@{bootstrap-5.0.2-dist/css/bootstrap-reboot.rtl.css.map}" rel="stylesheet"/>
+    <link th:href="@{bootstrap-5.0.2-dist/css/bootstrap-reboot.rtl.min.css}" rel="stylesheet"/>
+    <link th:href="@{bootstrap-5.0.2-dist/css/bootstrap-reboot.rtl.min.css.map}" rel="stylesheet"/>
+    <link th:href="@{bootstrap-5.0.2-dist/css/bootstrap-utilities.css}" rel="stylesheet"/>
+    <link th:href="@{bootstrap-5.0.2-dist/css/bootstrap-utilities.css.map}" rel="stylesheet"/>
+    <link th:href="@{bootstrap-5.0.2-dist/css/bootstrap-utilities.min.css}" rel="stylesheet"/>
+    <link th:href="@{bootstrap-5.0.2-dist/css/bootstrap-utilities.min.css.map}" rel="stylesheet"/>
+    <link th:href="@{bootstrap-5.0.2-dist/css/bootstrap-utilities.rtl.css}" rel="stylesheet"/>
+    <link th:href="@{bootstrap-5.0.2-dist/css/bootstrap-utilities.rtl.css.map}" rel="stylesheet"/>
+    <link th:href="@{bootstrap-5.0.2-dist/css/bootstrap-utilities.rtl.min.css}" rel="stylesheet"/>
+    <link th:href="@{bootstrap-5.0.2-dist/css/bootstrap-utilities.rtl.min.css.map}" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
+<script th:inline="javascript">
+</script>
+</head>
+<body>
+
+			<div th:include="commonFile/header::header"></div>
+
+
+<div class="container">
+
+
+                     <div th:switch="${u1.userChanger}">
+					   
+					                  <div th:case="'withoutState'" >
+				PLEASE SELECT STATE FIRST
+				<div class="form-group">
+					<label class="control-label" for="zipCode"
+						style="font-weight: bold"> ASSIGN STATE </label>
+					<form th:action="@{/adduser}" method="get" th:object="${dto}">
+						<select class="control-label" id="task" name="state"
+							th:field="*{stateId}" onchange="this.form.submit()">
+							<option class="dropdown" value="">Select State</option>
+							<option th:each="task : ${l1}" th:value="${task.stateId}"
+								th:text="${task.stateName}"></option>
+						</select>
+					</form>
+				</div>
+			</div>
+					                  
+					                  <div th:case="'withState'" >
+				                  
+				                      </div>
+                       </div>
+
+                    
+
+      
+               <div class="row" style="display:flex;justify-content:center">
+                     <div class="col-md-5 col-md-offset-3">
+				<div th:if="${param.success}" style="text-align: center">
+					<div class="alert-alert-dark" style="font-family: cursive;">
+						YOU HAVE SUCCESSFULLY REGISTERED</div>
+				</div>
+
+				<form th:action="@{/saveuser}" method="post" th:object="${dto}">
+                            <div class="form-group">
+                                <label class="control-label" for="firstName" style="font-weight:bold">
+                                    First Name
+                                </label>
+                                <input id="firstName" class="form-control" th:field="*{firstName}" requierd autofocus="autofocus"/>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="lastName" style="font-weight:bold">
+                                    Last Name
+                                </label>
+                                <input id="lastName" class="form-control" th:field="*{lastName}" requierd autofocus="autofocus"/>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="email" style="font-weight:bold">
+                                    Email
+                                </label>
+                                <input id="email" class="form-control" th:field="*{email}" requierd autofocus="autofocus"/>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="password" style="font-weight:bold">
+                                    Password
+                                </label>
+                                <input id="password" class="form-control" type="password"  th:field="*{password}" requierd autofocus="autofocus"/>
+                            </div>
+                          <div class="form-group">
+                            <label class="control-label" for="contact" style="font-weight:bold">
+                                Contact
+                            </label>
+                            <input id="contact" class="form-control"  th:field="*{contactNo}"   requierd autofocus="autofocus"/>
+                          </div>
+                        
+                        <div class="form-group">
+                            <label class="control-label" for="city" style="font-weight:bold">
+                                City
+                            </label>
+                            <input id="city" class="form-control" th:field="*{city}" requierd autofocus="autofocus"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="state" style="font-weight:bold">
+                                State
+                            </label>
+                            <input id="state" class="form-control" th:field="*{state}" requierd autofocus="autofocus"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="country" style="font-weight:bold">
+                                Country
+                            </label>
+                            <input id="country" class="form-control" th:field="*{country}" requierd autofocus="autofocus"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="zipCode" style="font-weight:bold">
+                                ZipCode
+                            </label>
+                            <input id="zipCode" class="form-control" th:field="*{zipCode}" requierd autofocus="autofocus"/>
+                        </div>
+                        
+                        
+                        <!-- ASSIGN STATE -->
+                      
+
+					
+					
+					
+					
+                                   <!--     <div class="form-group">
+                    <label class="control-label"  for="dips" style="font-weight:bold">Select Roles</label>
+                    <select class="form-control selectpicker" th:field="*{hobbieslist2}" id="roleId" multiple>
+
+                        <option th:each="dip : ${role}"
+                                th:value="${dip.roleId}"
+                                th:text="${dip.roleName}">dip
+                        </option>
+
+                    </select>
+                </div> -->
+                 <div class="form-group">
+                 <label class="control-label"  for="dips" style="font-weight:bold">Select Roles</label>
+                   <div th:each="locate : ${role}">
+												<input type="checkbox" th:value="${locate.roleId}"
+													th:text="${locate.roleName}" th:field="*{roleslist}"/>
+				  </div>
+            
+                  </div>
+ 
+					                 <div th:switch="${u1.userChanger}">
+					   
+								                  <div th:case="'withoutState'" >
+								                       PLEASE SELECT STATE FIRST
+								                  </div>
+					                  
+					                  <div th:case="'withState'">
+							  <div class="form-group">
+							 
+							  <h3 th:text="${m_strStateName}"></h3>
+								<input th:type="hidden" name="stateIdMen" th:value="${m_strStateId}" />
+							  </div>
+							 
+							 <div class="form-group">
+							  
+								<label class="control-label" for="dips"
+									style="font-weight: bold">Select City</label> <select
+									class="form-control selectpicker" th:field="*{citylist}"
+									id="roleId" multiple>
+
+									<option th:each="dip : ${l2}" th:value="${dip.cityId}"
+										th:text="${dip.cityName}">dip</option>
+
+								</select>
+							</div>
+
+
+							<div class="form-group">
+				                                <button type="submit" class="btn btn-dark" style="text-align:center">REGISTER</button>
+				                                <br>
+				                                <span style="color:black">Already Registered? &nbsp;<a href="/" th:href="@{/login}"><label style="color:black">Login Here</label></a></span>
+				                            </div>
+                                      </div>
+                       </div>
+                            
+                        </form>
+                    </div>
+            </div>
+        
+</div>
+
+
+
+
+
+
+</body>
+</html>
